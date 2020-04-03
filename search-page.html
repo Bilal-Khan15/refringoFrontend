@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Refringo | Search</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/demo/demo.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+  <style>
+      .profile-page .page-header {
+        height: 25vh;
+        background-position: top center;
+    }
+        .loader {
+          border: 6px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 6px solid #ab47bc;
+          width: 40px;
+          height: 40px;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+    
+        /* Safari */
+        @-webkit-keyframes spin {
+          50% { -webkit-transform: rotate(0deg); }
+          50% { -webkit-transform: rotate(360deg); }
+        }
+    
+        @keyframes spin {
+          50% { transform: rotate(0deg); }
+          50% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body class="profile-page sidebar-collapse">
+    <nav class="navbar navbar-color-on-scroll navbar-transparent fixed-top navbar-expand-lg" color-on-scroll="100">
+        <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="./index.html">
+                Refringo </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+<!--
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="./login-page.html" class="nav-link">
+                    <i class="material-icons">fingerprint</i> SignIn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="./signup-page.html" class="nav-link">
+                    <i class="material-icons">account_circle</i> Signup
+                    </a>
+                </li>
+                </ul>
+            </div>
+-->
+        </div>
+    </nav>
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('./assets/img/city-profile.jpg')">
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <div class="form-row">
+                        <div class="form-group col-xl-3 col-lg-3 col-md-3">
+                            <input type="text" class="form-control" id="city" placeholder="City" list="cities">
+                            <datalist id="cities">
+                            </datalist>
+                        </div>
+                        <div class="form-group col-xl-4 col-lg-4 col-md-4">
+                            <input type="text" class="form-control" id="country" placeholder="Country" list="countries">
+                            <datalist id="countries">
+                            </datalist>
+                        </div>
+                        <div class="form-group col-xl-4 col-lg-4 col-md-3">
+                            <input type="text" class="form-control" id="title" placeholder="Job Title" list="titles">
+                            <datalist id="titles">
+                            </datalist>
+                        </div>
+                        <div class="form-group col-xl-1 col-lg-1 col-md-2 mt-4">
+                            <button class="btn btn-primary btn-fab btn-fab-mini btn-round" id="search">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </div>
+                    </div>           
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto mb-3">
+                    <!-- <h3 style="font-weight: 600;display: row;">Searched Jobs <i class="material-icons"style="font-weight:600;">search</i></h3> -->
+                    <div class="load-content col-md-1 ml-auto mr-auto mt-5 mb-3">
+                        <div class="loader"></div>
+                    </div>
+                    <div class="no-content mt-3" style="display: none; justify-content: center;text-align: center;">
+                        <h3 class="card-title mt-3 mb-3">No Jobs Found!</h3>
+                    </div>
+                    <table id="dtBasicExample" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th ></th>
+                            </tr>
+                        </thead>
+                        <tbody id="listings">
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer" data-background-color="black">
+    </footer>
+        <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+    <script src="assets/js/plugins/moment.min.js"></script>
+  
+    <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+    <script src="assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="./dev-js/search-page.js"></script>
+
+</body>
+
+</html>
