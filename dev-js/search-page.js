@@ -17,7 +17,7 @@ $(document).ready(()=>{
         $('.no-content').show();
     }
     else{
-        $.get('http://refringo.com/jobs?country='+searchCountryParam+'&city='+searchCityParam+'&title='+searchTitleParam,function(data){
+        $.get('http://refringo.com:8080/jobs?country='+searchCountryParam+'&city='+searchCityParam+'&title='+searchTitleParam,function(data){
             // console.log(data)
             if(data.jobs.length===0){
                 $('.loader').hide();
@@ -122,7 +122,7 @@ $(document).ready(()=>{
     let title = new Array();
 
     // lists 
-    axios.get('http://refringo.com/lists')
+    axios.get('http://refringo.com:8080/lists')
     .then(resp=>{
         if(resp.status===200){
             // console.log(resp)

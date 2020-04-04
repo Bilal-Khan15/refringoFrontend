@@ -11,7 +11,7 @@ $(document).ready(()=>{
 
     let subCities;
     // lists 
-    axios.get('http://refringo.com/lists')
+    axios.get('http://refringo.com:8080/lists')
     .then(resp=>{
         if(resp.status===200){
             $.each(resp.data.city, function(index,item){
@@ -84,7 +84,7 @@ $(document).ready(()=>{
         }
 
 
-        axios.get('http://refringo.com/city?country='+country_val)
+        axios.get('http://refringo.com:8080/city?country='+country_val)
         .then(resp=>{
             if(resp.status===200){
                 $.each(resp.data.city, function(index,item){

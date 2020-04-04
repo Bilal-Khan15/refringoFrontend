@@ -6,7 +6,7 @@ $(document).ready(()=>{
         $('#apply-now').fadeOut();
         $('.loader').fadeIn();
             
-        axios.get('http://refringo.com/apply',{
+        axios.get('http://refringo.com:8080/apply',{
             params: {
                 url :  searchParam
             }        
@@ -18,8 +18,8 @@ $(document).ready(()=>{
         .catch(err=>console.log(err))
     })
 
-    link = 'http://refringo.com/job';
-    axios.get('http://refringo.com/job',{
+    link = 'http://refringo.com:8080/job';
+    axios.get('http://refringo.com:8080/job',{
     
         params: {
             url :  searchParam
