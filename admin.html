@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Refringo | ADMIN</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- Material Kit CSS -->
+  <link href="assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+      <!--
+      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+      Tip 2: you can also add an image using data-image tag
+  -->
+      <div class="logo">
+        <a class="simple-text logo-normal" href="admin.html">
+          ADMIN DASHBOARD
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="./editpage.html">
+              <i class="material-icons">assignment</i>
+              <p>Create / Edit Page</p>
+            </a>
+          </li>
+          <li class="nav-item active  ">
+            <a class="nav-link" href="./showpages.html">
+              <i class="material-icons">assignment</i>
+              <p>View Page</p>
+            </a>
+          </li>
+          <!-- your sidebar here -->
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="javascript:;">
+                  <i class="material-icons">notifications</i> Notifications -->
+                <!-- </a> -->
+              </li>
+              <!-- your navbar here -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content" style="background-color: white;">
+        <div class="container-fluid">
+          <!-- your content here -->
+          <div class="row">
+            <div class="col">
+              <textarea style="width: 100%; border-radius: 5px;border-color: gray;" rows="20" id="description" placeholder="Write here....."></textarea>
+              <div class="form-row">
+                <div class="form-group col-xl-3 col-lg-3 col-md-3">
+                  <input type="text" class="form-control" style="background-color: white;" id="page" placeholder="Select Page here and press Enter" list="cities">
+                  <datalist id="cities">
+                    <option>Terms&Conditions</option>
+                    <option>Cookies</option>
+                    <option>Imprints</option>
+                    <option>Data_Protection</option>
+                  </datalist>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4">
+                  <button type="button" class="btn btn-primary" id="save">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Classic Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Alert</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="material-icons">clear</i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="modalText">
+          </p>
+        </div>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    var page = '';
+    $(document).on('change','#page',function(){
+      page = $(this).val()
+    })
+    $(document).on('click','#save',function(){
+      if(page!==""){
+        let desc = $('#description').val();
+        console.log(desc,page)
+        axios.get('http://refringo.com:8080/addPage',{
+          params:{
+            description : desc,
+            typeof      : page,  
+          }
+        })
+        .then(response=>{
+          console.log(response)
+          if(response.data.response==="Page Added"){
+            $('#modalText').html('Page Added Successfully!');
+            $('#myModal').modal()            
+            setTimeout(()=>{
+              window.location.reload();
+            },1000)
+          }
+          else{
+            $('#modalText').html('Error Occured! Try Again!');
+            $('#myModal').modal()            
+          }  
+        })
+        .catch(err=>console.log(err))
+      }else{
+        $('#modalText').html('Please select valid input from dropdown');
+        $('#myModal').modal()
+      }
+    })
+  </script>
+</body>
+
+</html>
